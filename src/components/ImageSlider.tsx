@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaRegCircle } from "react-icons/fa";
 import { sliderData } from './sliderData';
 
 interface ImageData {
@@ -19,22 +19,32 @@ const ImageSlider: React.FC<props> = ({ slides }) => {
         setCurrent(current === 0 ? length - 1 : current - 1);
     }
     return (
-        <section className='slider'>
-            <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
-            <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
-            {
-                sliderData.map((slide: any, index: number) => {
-                    return (
+        <div className='container'>
+            <section className='slider'>
+                <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide} />
+                <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide} />
+                {
+                    sliderData.map((slide: any, index: number) => {
+                        return (
                         <div className={index === current ? "slide active" : "slide"} key={index}>
-                            {
-                                index === current && <img src={slide.image} alt="not found" className='image' />
-                            }
+                                {
+                                    index === current && <img src={slide.image} alt="not found" className='image' />
+                                }
                         </div>
-
-                    )
-                })
-            }
-        </section>
+                        )
+                    })
+                }
+            </section>
+            <div className='dots'>
+                {
+                    sliderData.map((slide: any, index: number) => {
+                        return (
+                            <FaRegCircle className={current===index? "dot-active" :"dot"} />
+                        )
+                    })
+                }
+            </div>
+        </div>
     )
 }
 
